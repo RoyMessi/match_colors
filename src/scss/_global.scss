@@ -1,0 +1,33 @@
+.hide {
+    visibility: hidden;
+}
+
+.prevent-pointer-events {
+    pointer-events: none;
+}
+
+.font-weight-bold {
+    font-weight: bold;
+}
+
+.flex-dir-column {
+    flex-direction: column;
+}
+
+.fade-in {
+    animation: fade-in 0.5s linear forwards;
+}
+
+.fade-out {
+    animation: fade-out 0.5s linear forwards;
+}
+
+@mixin cover-all-page {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: #222;
+    font-size: 2rem;
+}

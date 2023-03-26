@@ -1,0 +1,6 @@
+@import "./boxes_basic";
+@each $colorName, $colorValue in $box-colors {
+    .box-color-#{$colorName} {
+        background: $colorValue;
+    }
+}

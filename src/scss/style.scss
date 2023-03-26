@@ -1,0 +1,133 @@
+@import "./global";
+@import "./keyframes";
+
+:root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+
+    color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #242424;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+
+    --box-size: 6rem;
+    --box-size2: 3.5rem;
+    --box-gap-size: 0.1rem;
+    --board-hue: 150;
+    --board-box-hue: 175;
+    font-size: 16px;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    place-items: center;
+    min-width: 320px;
+    min-height: 100vh;
+}
+
+#app {
+    max-width: 1280px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+}
+
+#game_info {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    display: flex;
+    padding: 0.5rem 0;
+
+    > div {
+        position: relative;
+        display: flex;
+
+        span {
+            margin-left: 0.3rem;
+        }
+
+        &::after {
+            content: " | ";
+            display: inline-block;
+            padding: 0 0.5rem;
+        }
+        &:last-child:after {
+            content: "";
+            display: none;
+        }
+    }
+}
+
+#board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: var(--box-gap-size);
+    padding: 0.2rem;
+    background-color: hsl(var(--board-hue), 30%, 25%);
+}
+
+#board > * {
+    background-color: hsl(var(--board-box-hue), 100%, 10%);
+    width: var(--box-size);
+    height: var(--box-size);
+    border-radius: 0.2rem;
+
+    &.slide {
+        cursor: move;
+    }
+}
+
+#items_wrapper {
+    position: absolute;
+    inset: 0;
+}
+
+#button_wrapper {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 0.4rem;
+    margin-top: 1rem;
+}
+
+#overlap_wrapper {
+    position: absolute;
+    inset: 0;
+    background-color: #{"hsl(var(--board-box-hue) 50% 10% / .8)"};
+    display: none;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    pointer-events: none;
+}
+
+#game_completed {
+    @include cover-all-page;
+}
+
+#loader_load_new_level {
+    @include cover-all-page;
+}
+
+#overlap_wrapper.show,
+#loader_load_new_level.show,
+#game_completed.show {
+    display: flex;
+}
+
+#app_version {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 0.5rem;
+}

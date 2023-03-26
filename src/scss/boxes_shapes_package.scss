@@ -1,0 +1,98 @@
+@import "./boxes_basic";
+
+@mixin box-color($colorName) {
+    $color: map-get($box-colors, $colorName);
+    background: #{$color};
+}
+
+@mixin shape-star {
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+@mixin shape-bevel {
+    clip-path: polygon(15% 0%, 85% 0%, 100% 15%, 100% 85%, 85% 100%, 15% 100%, 0% 85%, 0% 15%);
+}
+
+@mixin shape-triangle {
+    clip-path: polygon(50% 0%, 0% 90%, 100% 90%);
+}
+
+@mixin shape-rhombus {
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+@mixin shape-pentagon {
+    clip-path: polygon(50% 0%, 100% 44%, 82% 100%, 18% 100%, 0% 44%);
+}
+
+@mixin shape-diamond {
+    clip-path: polygon(25% 0%, 75% 0%, 100% 25%, 50% 100%, 0% 25%);
+}
+
+@mixin shape-heptagon {
+    clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
+}
+
+@mixin shape-bomb {
+    clip-path: polygon(
+        100% 50%,
+        78.98% 57.76%,
+        93.3% 75%,
+        71.21% 71.21%,
+        75% 93.3%,
+        57.76% 78.98%,
+        50% 100%,
+        42.24% 78.98%,
+        25% 93.3%,
+        28.79% 71.21%,
+        6.7% 75%,
+        21.02% 57.76%,
+        0% 50%,
+        21.02% 42.24%,
+        6.7% 25%,
+        28.79% 28.79%,
+        25% 6.7%,
+        42.24% 21.02%,
+        50% 0%,
+        57.76% 21.02%,
+        75% 6.7%,
+        71.21% 28.79%,
+        93.3% 25%,
+        78.98% 42.24%
+    );
+}
+
+.box-color-red {
+    @include box-color("red");
+    @include shape-star;
+}
+
+.box-color-green {
+    @include box-color("green");
+    @include shape-bevel;
+}
+
+.box-color-blue {
+    @include box-color("blue");
+    @include shape-triangle;
+}
+
+.box-color-pink {
+    @include box-color("pink");
+    @include shape-rhombus;
+}
+
+.box-color-yellow {
+    @include box-color("yellow");
+    @include shape-pentagon;
+}
+
+.box-color-purple {
+    @include box-color("purple");
+    @include shape-diamond;
+}
+
+.box-color-orange {
+    @include box-color("orange");
+    @include shape-heptagon;
+}

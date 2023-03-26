@@ -1,0 +1,54 @@
+.box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform 0.2s, translate 0.7s, opacity 0.5s, scale 0.5s;
+    background-color: var(--board-box-bg);
+    width: var(--box-size2);
+    height: var(--box-size2);
+
+    &.drag-n-drop {
+        cursor: grab;
+    }
+
+    &.placeholder {
+        position: absolute;
+        top: -2000px;
+        border-width: 0.4rem;
+        box-shadow: none;
+    }
+
+    &.add {
+        animation: box-add 0.5s linear forwards;
+    }
+
+    &.move-not-allowed {
+        cursor: not-allowed;
+        animation: box-move-not-allowed 0.5s linear forwards;
+    }
+
+    &.about-to-remove {
+        transform: rotateX(0deg);
+        animation: box-remove 0.5s linear forwards;
+    }
+}
+
+$box-hue-colors: (
+    "red": 0,
+    "green": 120,
+    "blue": 240,
+    "pink": 349,
+    "yellow": 60,
+    "purple": 300,
+    "orange": 36,
+);
+
+$box-colors: (
+    "red": #d71818,
+    "green": #088908,
+    "blue": #1818df,
+    "pink": #e95b74,
+    "yellow": #b7b732,
+    "purple": #800180,
+    "orange": #af8900,
+);

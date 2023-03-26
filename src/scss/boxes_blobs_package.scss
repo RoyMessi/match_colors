@@ -1,0 +1,63 @@
+@import "./boxes_basic";
+
+$stroke-width: 100;
+$is-solid: true;
+
+// Function resource: https://css-tricks.com/snippets/sass/str-replace-function/
+@function str-replace($string, $search, $replace: "") {
+    $index: str-index($string, $search);
+
+    @if $index {
+        @return str-slice($string, 1, $index - 1) + $replace +
+            str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+    }
+
+    @return $string;
+}
+
+@mixin setShape($colorName, $svgUrl) {
+    $color: map-get($box-colors, $colorName);
+    $color-hue: map-get($box-hue-colors, $colorName);
+    $bgColor: "";
+    $borderColor: "";
+
+    @if ($is-solid) {
+        $bgColor: "hsl(#{$color-hue}, 90%, 50%)";
+        $borderColor: "hsl(#{$color-hue}, 90%, 20%)";
+    } @else {
+        $bgColor: none;
+        $borderColor: "hsl(#{$color-hue}, 90%, 50%)";
+    }
+
+    $url: str-replace($svgUrl, "#FILL#", $bgColor);
+    $url: str-replace($url, "#COLOR#", $borderColor);
+    $url: str-replace($url, "#STROKE-WIDTH#", $stroke-width);
+
+    background-image: url($url);
+    background-repeat: no-repeat no-repeat;
+    background-position: center center;
+    background-size: calc(var(--box-size2) - 0.7rem);
+}
+
+$box-shapes: (
+    "red":
+        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='562.5' height='577.333' viewBox='250 211.333 562.5 577.333'%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Cpath d='M625 716.5Q250 933 250 500t375-216.5q375 216.5 0 433Z'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23a)'%3E%3Cpath fill='#FILL#' stroke='#COLOR#' stroke-width='#STROKE-WIDTH#' d='M625 716.5Q250 933 250 500t375-216.5q375 216.5 0 433Z'/%3E%3C/g%3E%3C/svg%3E",
+    "green":
+        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='752.444' height='680.964' viewBox='153.499 199.117 752.444 680.964'%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Cpath d='M847.5 692Q722 884 502.5 880t-310-192q-90.5-188 29-325.5T513 202q172-23 316 137.5T847.5 692Z'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23a)'%3E%3Cpath fill='#FILL#' stroke='#COLOR#' stroke-width='#STROKE-WIDTH#' d='M847.5 692Q722 884 502.5 880t-310-192q-90.5-188 29-325.5T513 202q172-23 316 137.5T847.5 692Z'/%3E%3C/g%3E%3C/svg%3E",
+    "blue":
+        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='781.842' height='724.774' viewBox='92.944 124.646 781.842 724.774'%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Cpath fill='none' d='M829.5 696.5Q727 893 532.5 837t-350-196.5Q27 500 141.5 288.5t323-150Q673 200 802.5 350t27 346.5Z'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23a)'%3E%3Cpath fill='#FILL#' stroke='#COLOR#' stroke-width='#STROKE-WIDTH#' d='M829.5 696.5Q727 893 532.5 837t-350-196.5Q27 500 141.5 288.5t323-150Q673 200 802.5 350t27 346.5Z'/%3E%3C/g%3E%3C/svg%3E",
+    "pink":
+        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='683.694' height='798.532' viewBox='203.162 136.941 683.694 798.532'%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Cpath fill='none' d='M839.5 626.5Q753 753 626.5 873T364 882.5Q228 772 209.5 636t17-255Q262 262 381 183t260.5-22.5q141.5 56.5 213 198t-15 268Z'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23a)'%3E%3Cpath fill='#FILL#' stroke='#COLOR#' stroke-width='#STROKE-WIDTH#' d='M839.5 626.5Q753 753 626.5 873T364 882.5Q228 772 209.5 636t17-255Q262 262 381 183t260.5-22.5q141.5 56.5 213 198t-15 268Z'/%3E%3C/g%3E%3C/svg%3E",
+    "yellow":
+        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='548.648' height='668.432' viewBox='224.557 165.122 548.648 668.432'%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Cpath fill='currentColor' d='M768.5 680q18.5 180-159 149t-295-107Q197 646 233 517.5T351.5 299Q434 209 613 171.5T771 317q-21 183-2.5 363Z'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23a)'%3E%3Cpath fill='#FILL#' stroke='#COLOR#' stroke-width='#STROKE-WIDTH#' d='M768.5 680q18.5 180-159 149t-295-107Q197 646 233 517.5T351.5 299Q434 209 613 171.5T771 317q-21 183-2.5 363Z'/%3E%3C/g%3E%3C/svg%3E",
+    "purple":
+        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='808.709' height='754.028' viewBox='114.451 88.766 808.709 754.028'%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Cpath fill='currentColor' d='M881 611q-76 111-169 184t-199.5 34.5Q406 791 279 772T127.5 626.5q-24.5-126.5-3-255t126-223Q355 54 482 109t240 101q113 46 174 168t-15 233Z'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23a)'%3E%3Cpath fill='#FILL#' stroke='#COLOR#' stroke-width='#STROKE-WIDTH#' d='M881 611q-76 111-169 184t-199.5 34.5Q406 791 279 772T127.5 626.5q-24.5-126.5-3-255t126-223Q355 54 482 109t240 101q113 46 174 168t-15 233Z'/%3E%3C/g%3E%3C/svg%3E",
+    "orange":
+        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='686.069' height='731.928' viewBox='139.356 49.786 686.069 731.928'%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Cpath fill='currentColor' d='M824 622.5q14 122.5-109.5 140t-215 19q-91.5 1.5-228-7.5t-132-141.5Q144 500 232 434.5t104-228Q352 44 498 50t237.5 109q91.5 103 83 222t5.5 241.5Z'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23a)'%3E%3Cpath fill='#FILL#' stroke='#COLOR#' stroke-width='#STROKE-WIDTH#' d='M824 622.5q14 122.5-109.5 140t-215 19q-91.5 1.5-228-7.5t-132-141.5Q144 500 232 434.5t104-228Q352 44 498 50t237.5 109q91.5 103 83 222t5.5 241.5Z'/%3E%3C/g%3E%3C/svg%3E",
+);
+
+@each $colorName, $svgUrl in $box-shapes {
+    .box-color-#{$colorName} {
+        @include setShape($colorName, $svgUrl);
+    }
+}
