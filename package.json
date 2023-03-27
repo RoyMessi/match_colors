@@ -1,7 +1,7 @@
 {
   "name": "match_colors",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "author": {
     "name": "Roy Messi"
@@ -9,8 +9,8 @@
   "scripts": {
     "dev": "vite",
     "dev:host": "vite --host",
-    "scss:init": "node-sass -r src/scss -o src/styles --output-style=compressed",
-    "scss:watch": "node-sass -w -r src/scss -o src/styles --output-style=compressed",
+    "init:scss": "node-sass -r src/scss -o src/styles --output-style=compressed",
+    "watch:scss": "node-sass -w -r src/scss -o src/styles --output-style=compressed",
     "preview": "vite preview",
     "build:dev": "vite build --mode development && node src/after_dev_build.js",
     "build:prod": "vite build --mode production",

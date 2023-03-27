@@ -1,3 +1,8 @@
+export const APP_NAME = process.env.npm_package_name
+  .replace("_", " ")
+  .split(" ")
+  .map((word) => word.charAt(0).toUpperCase() + word.substring(1))
+  .join(" ");
 export const APP_VERSION = process.env.npm_package_version;
 export const DEV_MODE = process.env.DEV_MODE === "true";
 export const DEV_TEST_NAME = process.env.DEV_TEST_NAME ?? null;
